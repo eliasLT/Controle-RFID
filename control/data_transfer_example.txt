@@ -1,0 +1,73 @@
+ACR122U PICC Interface
+Connected to :  ACS ACR122 0
+
+ACR122U Get Data
+Get UID
+< FF CA 00 00 00 
+> 90 00 
+> UID: 07 BF F1 36 
+
+Get ATS
+< FF CA 01 00 00 
+> 6A 81 
+Function not supported
+
+ACR122U Get Data
+Get UID
+< FF CA 00 00 00 
+> 90 00 
+> UID: 47 26 72 38 
+
+Get ATS
+< FF CA 01 00 00 
+> 6A 81 
+Function not supported
+
+ACR122U Get Data
+Get UID
+< FF CA 00 00 00 
+> 90 00 
+> UID: 47 67 FD 36 
+
+Get ATS
+< FF CA 01 00 00 
+> 6A 81 
+Function not supported
+
+ACR122U Get Data
+Get UID
+< FF CA 00 00 00 
+> 90 00 
+> UID: D7 B5 EC 36 
+
+Get ATS
+< FF CA 01 00 00 
+> 6A 81 
+Function not supported
+
+ACR122U Get Data
+Get UID
+< FF CA 00 00 00 
+> 90 00 
+> UID: 47 AB F7 36 
+
+Get ATS
+< FF CA 01 00 00 
+> 6A 81 
+Function not supported
+
+https://www.youtube.com/watch?v=1F89jhkyIEs
+
+https://www.google.fr/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=2ahUKEwiNq72S3qXnAhV07eAKHfA8Bd4QFjAAegQIARAB&url=http%3A%2F%2Ftvaira.free.fr%2Frfid%2Ftutoriel-nfc-acr122u.pdf&usg=AOvVaw3Zrf0QDkXMkyS4eZGk5rSL
+
+https://www.youtube.com/watch?v=NSjmMZ3lfZg
+
+https://les-enovateurs.com/rfid-raspberry-pi-code/
+
+https://www.youtube.com/watch?v=8_tLz9PI_qA
+
+https://ressources.labomedia.org/utiliser_un_lecteur_rfid_acr_122u_gnu_linux
+
+https://www.journaldulapin.com/2013/07/08/nfc/
+
+https://smartlockpicking.com/slides/Confidence_A_2018_Practical_Guide_To_Hacking_RFID_NFC.pdf

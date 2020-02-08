@@ -1,0 +1,62 @@
+
+import NfcApi-ACR122U
+from Adafruit_PWM_Servo_Driver import PWM
+import time
+
+def main():
+        pwn = PWN(0x40)
+        servoMin = 150 # Min pulse length out of 4096
+        servoMax = 600 # Max pulse length out of 4096
+        pwn.setPWMFreq(60)
+
+        try :
+                card=rfidot.card
+        except :
+                exit()
+        card.info('multiselect v0.1n')
+
+        while(True):
+                try:
+                        card=rfidiot.card
+                except:
+                        exit()
+                card.info ('multiselect v0.1n')
+                card.settagtype (card.ALL)
+                if (card.uid=="07BFF136"):
+                        print("Authorized:" +card.uid)
+                        pwn.setPWM(0,0,servoMix)
+                        time.sleep(3)
+                        pwm.setPWM(0,0,servoMax)
+                elif (card.uid!= "07BFF136" and card.uid !=""):
+                        print ('Refused' + card.uid)
+main()
+
+
+
+
+
+nfc-mfsetuid 07bff136
+
+
+cd libnfc-1.7.1 //dossier raspberry
+
+nfc-poll
+
+m'etre la carte 
+
+
+
+
+
+
+
+import  os, re
+from subprocess import Popen, PIPE
+
+tags = [ "07 BF F1 36" ]
+
+if tags=={ "07 BF F1 36"}:
+        print ('auto')
+        tag_reading = Popen(["nfc-list"], stdout=PIPE).communicate()[0]
+
+

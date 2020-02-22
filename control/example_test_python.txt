@@ -9,9 +9,10 @@ def main():
         servoMax = 600 # Max pulse length out of 4096
         pwn.setPWMFreq(60)
 
-        try :
+        try :           
                 card=rfidot.card
         except :
+                print("could not rfidot.card")
                 exit()
         card.info('multiselect v0.1n')
 

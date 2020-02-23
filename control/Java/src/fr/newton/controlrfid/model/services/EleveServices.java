@@ -21,4 +21,43 @@ public class EleveServices {
             return null;
         }
     }
+
+
+    /**
+     * Cette fonction doit retourner l'éleve si trouvé sinon elle retourne null
+     * @param nom
+     * @param prenom
+     * @return
+     */
+    public static ArrayList<Eleve> existEleve(String nom, String prenom) {
+        Connection c;
+        try {
+            c = DBConnexion.getMySQLConnection();
+        } catch (SQLException e){
+            return null;
+        }
+        return  DBUtils.getEleveByName(c,nom,prenom);
+    }
+
+    public static ArrayList<Eleve> getEleveLate(String jour){
+        Connection c;
+        try {
+            c = DBConnexion.getMySQLConnection();
+        } catch (SQLException e){
+            return null;
+        }
+        return DBUtils.getElevesLate(c,jour);
+
+    }
+    public static ArrayList<Eleve> getEleveAbs(String jour){
+        Connection c;
+        try {
+            c = DBConnexion.getMySQLConnection();
+        } catch (SQLException e){
+            return null;
+        }
+        return DBUtils.getElevesABS(c,jour);
+
+
+    }
 }

@@ -25,6 +25,11 @@ public class Eleve {
         this(id, nom, prenom, classe, photo, "24:59");
     }
 
+    // Ce constructeur par defaut est requis par Gson
+    public Eleve(){
+
+    }
+
 
     public int getId() {
         return id;

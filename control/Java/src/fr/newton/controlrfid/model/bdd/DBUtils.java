@@ -19,6 +19,7 @@ public class DBUtils {
     //==========================================================================================
     //                                       UPDATE
     //==========================================================================================
+
     public static boolean  renvoieeleve(Connection c ) throws SQLException {
 
            PreparedStatement preparedStatement = c.prepareStatement(DBRequests.UPDATE_STATUS_ELEVE_SQL);
@@ -147,7 +148,6 @@ public class DBUtils {
 
     }
 
-
     public static ArrayList<HoraireCours> getSchedule(Connection c , String nom, String prenom ) {
         try {
             Eleve eleve = getEleveByName(c, nom, prenom).get(0);
@@ -170,23 +170,6 @@ public class DBUtils {
         }
     }
 
-
-    public static void main(String[] args) throws SQLException {
-//        insertEleve(DBConnexion.getMySQLConnection(), "SON", "GOHAN", "url/photo", "SAR" );
-//        InsertHoraire(DBConnexion.getMySQLConnection(),"Lundi","08:00:00","09:00:00","SAR","naruto");
-//        insertclasse(DBConnexion.getMySQLConnection(),"Maman");
-        ArrayList<HoraireCours> horaire = getSchedule(DBConnexion.getMySQLConnection(), "lotfi", "elias");
-        for (int i = 0; i < horaire.size(); i++) {
-            HoraireCours h = horaire.get(i);
-            System.out.print(h.getJour()+" - ");
-            System.out.print(h.getHD() + " - ");
-            System.out.println(h.getHF());
-
-        }
-
-
-
-
-    }
 }
+
 

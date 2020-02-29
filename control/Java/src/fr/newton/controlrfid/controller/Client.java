@@ -16,8 +16,12 @@ public class Client {
             Gson gson = builder.create();
 
             BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-            WebSocket ws = new WebSocket("localhost", 5555, "/eleve/retard");
+            WebSocket ws = new WebSocket("localhost", 5555, "/horaire/insert");
             JsonObject test = new JsonObject();
+            test.addProperty("classe", "SAR");
+            test.addProperty("HD", "18:00:00");
+            test.addProperty("HF", "19:00:00");
+            test.addProperty("prof", "Kaneki");
             test.addProperty("jour", "vendredi");
             String message = gson.toJson(test);
             ws.sendMessage(message);

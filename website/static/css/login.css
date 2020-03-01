@@ -1,0 +1,66 @@
+.background {
+
+    background: url("/static/images/background.jpeg") no-repeat center center fixed;
+    background-size: cover;
+    height: 100%;
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+
+}
+#time {
+  max-height: 300px;
+} 
+.date {
+  width: 100%;
+  display: flex;
+}
+.date #date{
+  display: inline-block;
+  margin: auto;
+  font-style:italic;
+  font-size: 2.8em;
+  color: black;
+  z-index: 1;
+}
+.heure {
+  width: 100%;
+  display: flex;
+}
+.heure #heure{
+  display: inline-block;
+  margin: auto;
+  font-size: 2.8em;
+  color: black;
+  z-index: 1;
+}
+.content{
+  color :rgb(16,16,16);
+}
+.ui.stacked.segment{
+  background-color: #D0A6C0;
+}
+.ui.left.icon.input .icon{
+  background-color: #90E02D;
+}
+
+.ui.submit.button {
+  background-color: #de1e7e;
+}
+.ui.submit.button:hover {
+  background-color:#90E02D;
+  opacity: .5;
+
+}
+body > .grid {
+  height: calc(100% - 300px);
+}
+.image {
+  margin-top: -100px;
+}
+.column {
+  max-width: 450px;
+}

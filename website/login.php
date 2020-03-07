@@ -35,15 +35,15 @@
     <h2 class="ui teal image header">
       <img src="static/images/logo.jpg" class="image">
       <div class="content">
-        Log-in to your account
+        Contrôle d'accès élèves
       </div>
     </h2>
-    <form class="ui large form">
+    <form action="redirections/connection.php" method="POST" class="ui large form">
       <div class="ui stacked segment">
         <div class="field">
           <div class="ui left icon input">
             <i class="user icon"></i>
-            <input type="text" name="email" placeholder="Login">
+            <input type="text" name="login" placeholder="Login">
           </div>
         </div>
         <div class="field">
@@ -52,7 +52,7 @@
             <input type="password" name="password" placeholder="Password">
           </div>
         </div>
-        <div class="ui fluid large teal submit button">Login</div>
+        <button type="submit" class="ui fluid large teal submit button">Login</button>
       </div>
 
       <div class="ui error message"></div>

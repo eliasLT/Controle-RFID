@@ -9,6 +9,8 @@ from smartcard.Exceptions import CardRequestTimeoutException
 import sys
 import datetime
 
+entree = {}
+
 # if len(sys.argv) < 2:
 # 	print "usage: nfcTool.py <command>\nList of available commands: help, mute, unmute, getuid, info, loadkey, read, firmver"
 # 	sys.exit()
@@ -40,7 +42,7 @@ def method() :
 	# cmd = sys.argv[1]
 	cmd = "getuid"
 
-	myFile = open("test.txt", "a+")
+	# myFile = open("test.txt", "a+")
 
 
 	if cmd == "help":
@@ -68,24 +70,30 @@ def method() :
 	
 	#send command
 	if type(COMMAND) == list:
-		# data, sw1, sw2 = connection.transmit(COMMAND)
 		data, sw1, sw2 = cardservice.connection.transmit(COMMAND)
-		# if cmd == "firmver":
-		# 	print cmd +": "+ ''.join(chr(i) for i in data)+chr(sw1)+chr(sw2)
-		# else:
 		current_time = datetime.datetime.now()
-		myFile.write(toHexString(data)+"#" +  str(current_time) + "\n")
-			# print cmd + ": " + toHexString(data)
-			# print "Status words: %02X %02X" % (sw1, sw2)
 		if (sw1, sw2) == (0x90, 0x0):
 			print "Status: The operation completed successfully."
+			current_time = datetime.datetime.now()
+			entree[toHexString(data)] = str(current_time)
+			
 		elif (sw1, sw2) == (0x63, 0x0):
 			print "Status: The operation failed."
+			print "Repeat ne passe pas"
 
 
 
-while True:
-	try :
-		method()
-	except CardRequestTimeoutException as err:
-		print "timeout"
+try:
+
+	while True:
+		try :
+			method()
+		except CardRequestTimeoutException as err: 
+			print "timeout"
+except KeyboardInterrupt as k:
+	toPrint = []
+	for i in entree.keys():
+		toPrint.append(i+"#"+entree[i])
+	myFile = open("test.txt", "a+")
+	text = "\n".join(toPrint)
+	myFile.write(text + "\n")

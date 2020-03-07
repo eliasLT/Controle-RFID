@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">BottomNavigationDemo</string>
+    <string name="create_eleve_url">/eleve/create</string>
+    <string name="uri_adresse">ws://localhost:5555</string>
+</resources>

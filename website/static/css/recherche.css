@@ -1,0 +1,71 @@
+.background {
+
+  background: url("/static/images/rechercheeleve.jpg") no-repeat center center fixed;
+  background-size: cover;
+  height: 100%;
+  filter: blur(8px);
+  /* -webkit-filter: blur(8px); */
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+
+}
+ul:not(.background) {
+  width: 100%;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li:not(.background) {
+  float: left;
+}
+
+li a:not(.background) {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #111;
+}
+
+.active {
+  background-color: #4CAF50;
+}
+
+
+
+.content{
+color :rgb(16,16,16);
+}
+.ui.stacked.segment{
+background-color: rgb(117, 117, 117);
+}
+.ui.left.icon.input .icon{
+background-color: rgb(255, 255, 255);
+}
+
+.ui.submit.button {
+background-color: #25151d;
+}
+.ui.submit.button:hover {
+background-color:rgb(0, 0, 0);
+opacity: .5;
+
+}
+body > .grid {
+height: calc(100% - 300px);
+}
+.image {
+margin-top: -100px;
+}
+.column {
+max-width: 450px;
+}

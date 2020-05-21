@@ -1,16 +1,28 @@
 package fr.newton.controlrfid.model.bdd;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import fr.newton.controlrfid.model.structures.Eleve;
 import fr.newton.controlrfid.model.structures.HoraireCours;
+import fr.newton.controlrfid.model.structures.Schedule;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.*;
 
 public class DBUtils {
-
+    static List<String> jours = Arrays.asList(
+            "Lundi",
+            "mardi",
+            "mercredi",
+            "jeudi",
+            "vendredi"
+    );
+    private static final GsonBuilder builder = new GsonBuilder();
+    private static final Gson gson = builder.create();
 
     //==========================================================================================
     //                                       DELETE
@@ -67,6 +79,25 @@ public class DBUtils {
         preparedStatement.setString(4, classe);
         int res = preparedStatement.executeUpdate();
         return res == 1;
+    }
+    public static boolean insertEntreEleve(Connection c , String Uid , String heureArriver) throws SQLException{
+        PreparedStatement preparedStatement = c.prepareStatement(DBRequests.INSERT_Entree_Parser_SQL);
+        preparedStatement.setString(1,Uid);
+        preparedStatement.setString(2,heureArriver);
+        int res = preparedStatement.executeUpdate();
+        return res == 1;
+
+    }
+    public static boolean insertCarte(Connection c , String uid , String nom,String prenom) throws SQLException {
+        PreparedStatement preparedStatement = c.prepareStatement(DBRequests.INSERT_Carte_SQL);
+        preparedStatement.setString(1,uid);
+        preparedStatement.setString(2,uid);
+        preparedStatement.setString(3,uid);
+
+        int res = preparedStatement.executeUpdate();
+        return res == 1;
+
+
     }
 
 
@@ -169,6 +200,51 @@ public class DBUtils {
             return new ArrayList<>();
         }
     }
+
+
+    public static String retreiveEleveDataFromLecteur(Connection c, String uid ) {
+        try {
+            PreparedStatement preparedStatementID = c.prepareStatement(DBRequests.RetreiveEleveFromLecteur);
+            preparedStatementID.setString(1,uid);
+            ResultSet setID = preparedStatementID.executeQuery();
+//            ArrayList<HoraireCours> res = new ArrayList<>();
+            Map<String, ArrayList<HoraireCours>> res = new HashMap<>();
+            for (String j : jours){
+                res.put(j, new ArrayList<>());
+            }
+            int id = 0;
+            String nom = "";
+            String prenom = "";
+            String classe = "";
+            String photo ="";
+            String heureArrive = "";
+            while (setID.next()) {
+                id = setID.getInt("idE");
+                nom = setID.getString("e.nom");
+                prenom = setID.getString("prenom");
+                photo = setID.getString("photo");
+                heureArrive = setID.getString("entree_eleve.h_entree");
+
+
+
+                classe = setID.getString("classe.nom");
+                String jour = setID.getString("jour");
+                String HD = setID.getString("h_debut");
+                String HF = setID.getString("h_fin");
+                String prof = setID.getString("nom_prof");
+                HoraireCours h = new HoraireCours(classe, HD,HF,prof, jour);
+                res.get(jour).add(h);
+            }
+            Schedule schedule = new Schedule(res);
+            Eleve eleve = new Eleve(id,nom,prenom,classe,photo,heureArrive,schedule);
+            return gson.toJson(eleve);
+        } catch (SQLException e) {
+            return "{\"error\" : \"internal error\"}";
+        }
+    }
+
+
+
 
 }
 

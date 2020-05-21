@@ -1,30 +1,27 @@
 package fr.newton.controlrfid.model.structures;
 
-
-
-
 public class EntreeEleve {
-    private String idEleve;
-    private String heureArrive;
+    private String uid;
+    private String heure;
 
-    public EntreeEleve(String idEleve, String heureArrive) {
-        this.idEleve = idEleve;
-        this.heureArrive = heureArrive;
+    public EntreeEleve(String uid, String heure) {
+        this.uid = uid;
+        this.heure = heure;
     }
 
     public String getIdEleve() {
-        return idEleve;
+        return uid;
     }
 
-    public void setIdEleve(String idEleve) {
-        this.idEleve = idEleve;
+    public void setIdEleve(String uid) {
+        this.uid = uid;
     }
 
     public String getHeureArrive() {
-        return heureArrive;
+        return heure;
     }
 
-    public void setHeureArrive(String heureArrive) {
-        this.heureArrive = heureArrive;
+    public void setHeureArrive(String heure) {
+        this.heure = heure;
     }
 }

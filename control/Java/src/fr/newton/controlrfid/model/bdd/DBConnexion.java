@@ -3,6 +3,7 @@ package fr.newton.controlrfid.model.bdd;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -21,17 +22,17 @@ public class DBConnexion {
     public Connection getConnection() throws SQLException {
         return dataSource.getConnection();
     }
-    public static Connection getMySQLConnection() throws SQLException {
+    public static Connection getMySQLConnection() throws SQLException, IOException {
         if(! DBStatic.mysql_pooling){
             try{
                 Class.forName("com.mysql.jdbc.Driver");
             } catch (ClassNotFoundException e) {
             }
             return (DriverManager.getConnection("jdbc:mysql://"+
-                    DBStatic.mysql_host + "/" +
-                    DBStatic.mysql_db ,
-                    DBStatic.mysql_username,
-                    DBStatic.mysql_password));
+                    DBStatic.getMysql_host() + "/"+
+                    DBStatic.getMysql_db() ,
+                    DBStatic.getMysql_username(),
+                    DBStatic.getMysql_password()));
         }else{
             return new DBConnexion("jdbc/db").getConnection();
         }

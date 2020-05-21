@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import fr.newton.controlrfid.model.services.EleveServices;
 import fr.newton.controlrfid.model.structures.Eleve;
+import fr.newton.controlrfid.model.structures.EntreeEleve;
 import fr.newton.controlrfid.model.structures.HoraireCours;
 
 import java.util.ArrayList;
@@ -170,7 +171,94 @@ public class RequestHandler {
     }
 
 
+    public static String insertEntreEleve(String request) {
+        EntreeEleve entrer;
+        try {
+            entrer = gson.fromJson(request, EntreeEleve.class);
+        } catch (JsonSyntaxException e) {
+            return gson.toJson(
+                    getErrorResponse("Could not parse the request")
+            );
+        }
+        if (entrer.getIdEleve() == null || entrer.getHeureArrive() == null) {
+            return gson.toJson(
+                    getErrorResponse("Missing nom or prenom parameter")
+            );
+        }
+        boolean isInserted =
+                EleveServices.insertEntreeEleve(entrer.getIdEleve(),entrer.getHeureArrive());
+        if (! isInserted) {
+            return gson.toJson(
+                    getErrorResponse("Could not insert the horaire")
+            );
+        }
+        JsonObject res = getSuccessResponse();
+        res.add("isInserted", gson.toJsonTree(isInserted));
+        return gson.toJson(res);
+
+    }
+
+    /**
+     *
+     * @param request
+     * @return
+     */
+    public static String retreiveDataEleveFromLecteur(String request) {
+        JsonObject data;
+        //etape 1 : on parse la requete JSon
+        try {
+            data = gson.fromJson(request, JsonObject.class);
+
+        } catch (JsonSyntaxException e) {
+            return gson.toJson(
+                    getErrorResponse("Could not parse the request")
+            );
+        }
+
+        //etape 2 : on verifie si la requete est correct
+        if (data.get("uid") == null || data.get("heure") ==  null){
+            return gson.toJson(
+                    getErrorResponse("Missing nom or prenom parameter")
+            );
+        }
+         return EleveServices.retreiveEleveDataFromLecteur(data.get("uid").getAsString());
+    }
+
+//    public static String insertCarte(String request) {
+//        Carte carte;
+//        try {
+//            carte = gson.fromJson(request, Carte.class);
+//        } catch (JsonSyntaxException e) {
+//            return gson.toJson(
+//                    getErrorResponse("Could not parse the request")
+//            );
+//        }
+//        if (carte.getIdE() == 0) {
+//            return gson.toJson(
+//                    getErrorResponse("Missing nom or prenom parameter")
+//            );
+//        } else if (carte.getUid() == null) {
+//            return gson.toJson(
+//                    getErrorResponse("Missing nom or prenom parameter")
+//            );
+//        }
+//        boolean isInserted =
+//                EleveServices.
+//                        insertcarte(carte.getUid(), carte.getIdE());
+//        if (! isInserted) {
+//            return gson.toJson(
+//                    getErrorResponse("Could not insert the horaire")
+//            );
+//        }
+//        JsonObject res = getSuccessResponse();
+//        res.add("isInserted", gson.toJsonTree(isInserted));
+//        return gson.toJson(res);
+//
+//
+//    }
+
     // ===================================================================================================
+
     //                                          Utilities
 
     // ===================================================================================================
@@ -202,4 +290,6 @@ public class RequestHandler {
         res.addProperty("message", "Unhandled request");
         return gson.toJson(res);
     }
+
+
 }

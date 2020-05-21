@@ -10,6 +10,20 @@ public class Eleve {
     private String classe;
     private String photo;
     private String heureArrive;
+    private Schedule emploidutemps;
+
+
+
+    public Eleve(int id, String nom, String prenom, String classe, String photo, String heureArrive, Schedule emploidutemps) {
+        this.id = id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.classe = classe;
+        this.photo = photo;
+        this.heureArrive = heureArrive;
+        this.emploidutemps = emploidutemps;
+    }
+
 
 
     public Eleve(int id, String nom, String prenom, String classe, String photo, String heureArrive) {

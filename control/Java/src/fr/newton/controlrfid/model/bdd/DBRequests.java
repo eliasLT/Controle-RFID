@@ -24,6 +24,10 @@ public class DBRequests {
             "INSERT INTO classe(nom) VALUES (?)";
 
 
+    public static final String INSERT_Entree_Parser_SQL =
+            "INSERT INTO entree_eleve (idE, h_entree) VALUES ((SELECT idE FROM cartes WHERE id = ?),?)";
+    public static final String INSERT_Carte_SQL =
+            "INSERT INTO cartes (id, idE) VALUES (?,(SELECT id FROM eleves WHERE nom = ? AND prenom = ?))";
     //==========================================================================================
     //                                      UPDATE
     //==========================================================================================
@@ -79,10 +83,22 @@ public class DBRequests {
             "    FROM entree_eleve " +
             ")";
 
-
+    public static final String RetreiveEleveFromLecteur =
+            "select  * from\n" +
+                    "        cartes AS c ,\n" +
+                    "        eleves AS e ,\n" +
+                    "        horaire_cours,\n" +
+                    "        classe,\n" +
+                    "        entree_eleve\n" +
+                    "WHERE c.id = ?\n" +
+                    "and c.idE = e.id\n" +
+                    "and e.id_classe = horaire_cours.id_classe\n" +
+                    "and classe.id = e.id_classe\n" +
+                    "and entree_eleve.idE = e.id";
     //==========================================================================================
     //                                       DELETE
     //==========================================================================================
+
 
 }
 
